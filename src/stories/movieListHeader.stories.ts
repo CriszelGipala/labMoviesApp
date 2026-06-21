@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import MovieListHeader from "../components/headerMovieList";
+import MovieListHeader from "../components/headerMovie";
 
 const meta = {
     title: 'Home Page/Header',
