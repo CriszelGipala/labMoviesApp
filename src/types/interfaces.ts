@@ -1,8 +1,11 @@
+export type FilterOption = "title" | "genre";
+
 export interface BaseMovieProps {
     title: string;
     budget: number;
     homepage: string | undefined;
     id: number;
+    genre_ids: number[];
     imdb_id: string;
     original_language: string;
     overview: string;
