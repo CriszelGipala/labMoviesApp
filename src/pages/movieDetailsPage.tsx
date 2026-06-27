@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { MovieDetailsProps, MovieImage } from "../types/interfaces";
-import MovieHeader from "../components/headerMovie/";
+import MovieHeader from "../components/headerMovieList/";
 import MovieDetails from "../components/movieDetails";
+import { getMovie, getMovieImages } from "../api/tmdb-api";
 import Grid from "@mui/material/Grid";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
@@ -24,24 +25,18 @@ const MoviePage: React.FC = () => {
   const [movie, setMovie] = useState<MovieDetailsProps>();
   const [images, setImages] = useState<MovieImage[]>([]);
 
-  const tmdbKey = import.meta.env.VITE_TMDB_KEY || import.meta.env.VITE_TMDB_API_KEY;
+  useEffect(() => {
+    getMovie(id ?? "").then((movie) => {
+      setMovie(movie);
+    });
+  }, [id]);
 
   useEffect(() => {
-    fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${tmdbKey}`)
-      .then((res) => res.json())
-      .then((movieData) => {
-        setMovie(movieData);
-      });
-  }, [id, tmdbKey]);
-
-  useEffect(() => {
-    fetch(`https://api.themoviedb.org/3/movie/${id}/images?api_key=${tmdbKey}`)
-      .then((res) => res.json())
-      .then((json) => json.posters || [])
-      .then((imageData) => {
-        setImages(imageData);
-      });
-  }, [id, tmdbKey]);
+    getMovieImages(id ?? "").then((images) => {
+      setImages(images);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
