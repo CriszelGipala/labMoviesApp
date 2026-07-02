@@ -22,9 +22,13 @@ const styles = {
   },
 };
 
-const MovieHeader: React.FC<MovieDetailsProps> = (movie) => {
+type MovieHeaderProps = Partial<MovieDetailsProps> & {
+  title: string;
+};
+
+const MovieHeader: React.FC<MovieHeaderProps> = (movie) => {
   const favourites = JSON.parse(localStorage.getItem("favourites") || "[]") as { id: number }[];
-  const isFavourite = favourites.some((favourite) => favourite.id === movie.id);
+  const isFavourite = movie.id !== undefined && favourites.some((favourite) => favourite.id === movie.id);
   
   return (
     <Paper component="div" sx={styles.root}>
