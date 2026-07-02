@@ -43,8 +43,12 @@ const MovieHeader: React.FC<MovieDetailsProps> = (movie) => {
         <a href={movie.homepage}>
           <HomeIcon color="primary"  fontSize="large"/>
         </a>
-        <br />
-        <span>{`${movie.tagline}`} </span>
+        {movie.tagline ? (
+          <>
+            <br />
+            <span>{movie.tagline} </span>
+          </>
+        ) : null}
       </Typography>
       <IconButton aria-label="go forward">
         <ArrowForwardIcon color="primary" fontSize="large" />
