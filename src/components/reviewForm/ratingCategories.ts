@@ -20,4 +20,5 @@ const ratings = [
     label: "Terrible",
   },
 ];
-  export default ratings
+
+export default ratings;

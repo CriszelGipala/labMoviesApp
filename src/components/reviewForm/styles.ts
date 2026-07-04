@@ -1,4 +1,4 @@
-const styles =  {
+const styles = {
   root: {
     marginTop: 2,
     display: "flex",
@@ -24,4 +24,5 @@ const styles =  {
     },
   },
 };
-export default styles
+
+export default styles;

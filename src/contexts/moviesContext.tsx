@@ -43,7 +43,7 @@ const MoviesContextProvider: React.FC<React.PropsWithChildren> = ({ children }) 
         setMyReviews((prevReviews) => [
             ...prevReviews.filter((r) => r.movieId !== movie.id),
             review,
-        ])
+        ]);
     };
 
     const addToMustWatch = useCallback((movie: BaseMovieProps) => {
