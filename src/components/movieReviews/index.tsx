@@ -10,7 +10,13 @@ import { Link } from "react-router-dom";
 import { getMovieReviews } from "../../api/tmdb-api";
 import { excerpt } from "../../util";
 
-import { MovieDetailsProps, Review } from "../../types/interfaces";
+import { MovieDetailsProps } from "../../types/interfaces";
+
+interface TmdbReview {
+    id: string;
+    content: string;
+    author: string;
+}
 
 const styles = {
     table: {
@@ -39,7 +45,7 @@ const MovieReviews: React.FC<MovieDetailsProps> = (movie) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {reviews.map((r: Review) => (
+                    {reviews.map((r: TmdbReview) => (
                         <TableRow key={r.id}>
                             <TableCell component="th" scope="row">
                                 {r.author}
