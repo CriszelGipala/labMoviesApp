@@ -13,7 +13,7 @@ import CalendarIcon from "@mui/icons-material/CalendarTodayTwoTone";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import Grid from "@mui/material/Grid";
 import img from '../../images/film-poster-placeholder.png';
-import { BaseMovieProps } from "../../types/interfaces"; 
+import { BaseMovieProps } from "../../types/interfaces";
 import { MoviesContext } from "../../contexts/moviesContext";
 
 const styles = {
@@ -24,14 +24,14 @@ const styles = {
   },
 };
 
-interface MovieCardProps  {
+interface MovieCardProps {
   movie: BaseMovieProps;
   action: (m: BaseMovieProps) => React.ReactNode;
 }
 
-const MovieCard: React.FC<MovieCardProps> = ({movie, action}) => {
+const MovieCard: React.FC<MovieCardProps> = ({ movie, action }) => {
   const { favourites } = useContext(MoviesContext);
-  const isFavourite = favourites.find((id) => id === movie.id)? true : false;
+  const isFavourite = favourites.find((id) => id === movie.id) ? true : false;
 
   return (
     <Card sx={styles.card}>

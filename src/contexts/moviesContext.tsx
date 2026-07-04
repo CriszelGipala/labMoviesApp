@@ -13,10 +13,10 @@ interface MovieContextInterface {
 const initialContextState: MovieContextInterface = {
     favourites: [],
     mustWatch: [],
-    addToFavourites: () => {},
-    removeFromFavourites: () => {},
-    addReview: (movie, review) => { movie.id, review},
-    addToMustWatch: () => {},
+    addToFavourites: () => { },
+    removeFromFavourites: () => { },
+    addReview: (movie, review) => { movie.id, review },
+    addToMustWatch: () => { },
 };
 
 export const MoviesContext = React.createContext<MovieContextInterface>(initialContextState);
@@ -24,7 +24,7 @@ export const MoviesContext = React.createContext<MovieContextInterface>(initialC
 const MoviesContextProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
     const [favourites, setFavourites] = useState<number[]>([]);
     const [mustWatch, setMustWatch] = useState<number[]>([]);
-    const [, setMyReviews] = useState<Review[]>( [] )
+    const [, setMyReviews] = useState<Review[]>([])
 
     const addToFavourites = useCallback((movie: BaseMovieProps) => {
         setFavourites((prevFavourites) => {
@@ -39,12 +39,12 @@ const MoviesContextProvider: React.FC<React.PropsWithChildren> = ({ children }) 
         setFavourites((prevFavourites) => prevFavourites.filter((mId) => mId !== movie.id));
     }, []);
 
-    const addReview = (movie:BaseMovieProps, review: Review) => {
+    const addReview = (movie: BaseMovieProps, review: Review) => {
         setMyReviews((prevReviews) => [
             ...prevReviews.filter((r) => r.movieId !== movie.id),
             review,
         ])
-      };
+    };
 
     const addToMustWatch = useCallback((movie: BaseMovieProps) => {
         setMustWatch((prevMustWatch) => {
