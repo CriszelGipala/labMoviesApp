@@ -3,11 +3,13 @@ import MovieHeader from "../components/headerMovieList";
 import SampleMovie from "./sampleData";
 import { MemoryRouter } from "react-router";
 
+import React from 'react';
+
 const meta = {
     title: "Movie Details Page/MovieHeader",
     component: MovieHeader,
     decorators: [
-        (Story) => <MemoryRouter initialEntries={["/"]}>{Story()}</MemoryRouter>,
+        (Story: React.FC) => <MemoryRouter initialEntries={["/"]}><Story /></MemoryRouter>,
     ],
 } satisfies Meta<typeof MovieHeader>;
 export default meta;
