@@ -1,3 +1,5 @@
+import type React from "react";
+
 export type FilterOption = "title" | "genre";
 
 export interface BaseMovieProps {
@@ -22,7 +24,7 @@ export interface BaseMovieProps {
 
  export interface BaseMovieListProps { 
     movies: BaseMovieProps[];
-    selectFavourite: (movieId: number) => void;
+    action: (m: BaseMovieProps) => React.ReactNode;
   }   
 
 export interface MovieListPageTemplateProps extends BaseMovieListProps {
