@@ -75,3 +75,34 @@ export const getMovieImages = (id: string | number) => {
         return json.results;
       });
   };
+
+// Assignment actor/person API calls for the Popular Actors and Actor Details pages.
+export const getPopularPeople = () => {
+  return fetch(
+    `https://api.themoviedb.org/3/person/popular?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&page=1`
+  ).then((response) => {
+    if (!response.ok)
+      throw new Error(`Unable to fetch popular people. Response status: ${response.status}`);
+    return response.json();
+  });
+};
+
+export const getPerson = (id: string) => {
+  return fetch(
+    `https://api.themoviedb.org/3/person/${id}?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US`
+  ).then((response) => {
+    if (!response.ok)
+      throw new Error(`Unable to fetch person details. Response status: ${response.status}`);
+    return response.json();
+  });
+};
+
+export const getPersonMovieCredits = (id: string) => {
+  return fetch(
+    `https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US`
+  ).then((response) => {
+    if (!response.ok)
+      throw new Error(`Unable to fetch person movie credits. Response status: ${response.status}`);
+    return response.json();
+  }).then((json) => json.cast);
+};
