@@ -78,3 +78,34 @@ export interface DiscoverMovies {
   total_results: number;
   results: BaseMovieProps[];
 }
+
+// Assignment actor/person types for the Popular Actors and Actor Details pages.
+export interface PersonProps {
+  id: number;
+  name: string;
+  profile_path?: string;
+  popularity: number;
+  known_for_department: string;
+  known_for?: BaseMovieProps[];
+}
+
+export interface PopularPeople {
+  page: number;
+  total_pages: number;
+  total_results: number;
+  results: PersonProps[];
+}
+
+export interface PersonDetailsProps extends PersonProps {
+  biography: string;
+  birthday: string;
+  place_of_birth: string;
+}
+
+export interface PersonMovieCredit {
+  id: number;
+  title: string;
+  character: string;
+  poster_path?: string;
+  release_date: string;
+}
