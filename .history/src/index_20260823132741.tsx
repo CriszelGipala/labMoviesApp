@@ -12,6 +12,7 @@ import AddMovieReviewPage from './pages/addMovieReviewPage';
 import PopularPeoplePage from "./pages/popularPeoplePage";
 import SiteHeader from './components/siteHeader'
 import MoviesContextProvider from "./contexts/moviesContext";
+import PopularPeoplePage from "./pages/popularPeoplePage";
 
 
 const queryClient = new QueryClient({

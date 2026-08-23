@@ -38,8 +38,7 @@ const App = () => {
             <Route path="/people" element={<PopularPeoplePage />} />
             <Route path="/movies/:id" element={<MoviePage />} />
             <Route path="/" element={<HomePage />} />
-            <Route path="*" element={<Navigate to="/" />} />
-          </Routes>
+            <Route path="*" element={<Navigate to="/" />} />          </Routes>
         </MoviesContextProvider>
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false} />

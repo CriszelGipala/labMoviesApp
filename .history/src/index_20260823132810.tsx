@@ -12,6 +12,7 @@ import AddMovieReviewPage from './pages/addMovieReviewPage';
 import PopularPeoplePage from "./pages/popularPeoplePage";
 import SiteHeader from './components/siteHeader'
 import MoviesContextProvider from "./contexts/moviesContext";
+import PopularPeoplePage from "./pages/popularPeoplePage";
 
 
 const queryClient = new QueryClient({
@@ -39,6 +40,7 @@ const App = () => {
             <Route path="/movies/:id" element={<MoviePage />} />
             <Route path="/" element={<HomePage />} />
             <Route path="*" element={<Navigate to="/" />} />
+            
           </Routes>
         </MoviesContextProvider>
       </BrowserRouter>
