@@ -1,11 +1,14 @@
-import React from "react";
+import React, { ChangeEvent, useState } from "react";
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
 import PersonListPageTemplate from "../components/templatePersonListPage";
 import { getPopularPeople } from "../api/tmdb-api";
 import { PopularPeople } from "../types/interfaces";
+import TextField from "@mui/material/TextField";
 
 const PopularPeoplePage: React.FC = () => {
+  const [nameFilter, setNameFilter] = useState("");
+
   const { data, error, isLoading, isError } = useQuery<PopularPeople, Error>(
     "popularPeople",
     getPopularPeople
@@ -20,8 +23,26 @@ const PopularPeoplePage: React.FC = () => {
   }
 
   const people = data ? data.results : [];
+  const displayedPeople = people.filter((person) =>
+  person.name.toLowerCase().includes(nameFilter.toLowerCase())
+);
 
-  return <PersonListPageTemplate title="Popular Actors" people={people} />;
+  const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+  setNameFilter(e.target.value);
+};
+
+  return (
+  <>
+    <TextField
+      label="Filter actors"
+      variant="filled"
+      value={nameFilter}
+      onChange={handleNameChange}
+      sx={{ margin: 2 }}
+    />
+    <PersonListPageTemplate title="Popular Actors" people={displayedPeople} />
+  </>
+);
 };
 
 export default PopularPeoplePage;
