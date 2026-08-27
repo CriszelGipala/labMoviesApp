@@ -10,6 +10,7 @@ import MovieReviewPage from "./pages/movieReviewPage";
 import UpcomingMoviesPage from "./pages/upcomingMoviesPage";
 import AddMovieReviewPage from './pages/addMovieReviewPage';
 import SiteHeader from './components/siteHeader'
+import PopularPeoplePage from "./pages/popularPeoplePage";
 import MoviesContextProvider from "./contexts/moviesContext";
 
 
@@ -37,6 +38,7 @@ const App = () => {
             <Route path="/movies/:id" element={<MoviePage />} />
             <Route path="/" element={<HomePage />} />
             <Route path="*" element={<Navigate to="/" />} />
+            <Route path="/people" element={<PopularPeoplePage />} />
           </Routes>
         </MoviesContextProvider>
       </BrowserRouter>
