@@ -13,6 +13,8 @@ import SiteHeader from './components/siteHeader'
 import PopularPeoplePage from "./pages/popularPeoplePage";
 import MoviesContextProvider from "./contexts/moviesContext";
 import PersonDetailsPage from "./pages/personDetailsPage";
+import TopRatedMoviesPage from "./pages/topRatedMoviesPage";
+
 
 
 
@@ -40,6 +42,7 @@ const App = () => {
             <Route path="/people" element={<PopularPeoplePage />} />
             <Route path="/people/:id" element={<PersonDetailsPage />} />
             <Route path="/movies/:id" element={<MoviePage />} />
+            <Route path="/movies/top-rated" element={<TopRatedMoviesPage />} />
             <Route path="/" element={<HomePage />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
