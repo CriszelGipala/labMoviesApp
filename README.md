@@ -1,30 +1,100 @@
-# React + TypeScript + Vite
+# TMDB Client Assignment
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project extends the TMDB movie app developed during the Full Stack 2 labs.
 
-Currently, two official plugins are available:
+The aim is to keep the assignment close to the lab style so the code is easy to understand and explain. The app uses React, TypeScript, React Router, React Query, MUI, and the TMDB API.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features Implemented
 
-## Expanding the ESLint configuration
+- Discover movies page from the lab.
+- Favourite movies support from the lab.
+- Upcoming movies page from the lab.
+- Movie details and movie reviews from the lab.
+- Popular Actors page.
+- Actor details page.
+- Actor movie credits list.
+- Top Rated Movies page.
+- Actor name filtering on the Popular Actors page.
+- Data links from actor cards to actor details.
+- Data links from actor movie credits back to movie details.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Planned Small Extra
 
-- Configure the top-level `parserOptions` property like this:
+The next small improvement is actor sorting on the Popular Actors page.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+The planned sort options are:
+
+- Popularity
+- Name
+
+This is intended as a simple extra feature because it builds directly on the actor filter already added to the page.
+
+## Routes
+
+| Route | Page |
+| --- | --- |
+| `/` | Discover Movies |
+| `/movies/:id` | Movie Details |
+| `/movies/favourites` | Favourite Movies |
+| `/movies/upcoming` | Upcoming Movies |
+| `/movies/top-rated` | Top Rated Movies |
+| `/people` | Popular Actors |
+| `/people/:id` | Actor Details |
+| `/reviews/:id` | Movie Review |
+| `/reviews/form` | Add Movie Review |
+
+## TMDB Endpoints Used
+
+- Discover movies
+- Movie details
+- Movie genres
+- Movie reviews
+- Upcoming movies
+- Top rated movies
+- Popular people
+- Person details
+- Person movie credits
+
+## React Features Used
+
+- Reusable components
+- Props
+- State with `useState`
+- React Router routes and URL parameters
+- React Query for server state caching
+- Context from the lab favourites/reviews work
+- MUI components for layout, cards, buttons, chips, and forms
+
+## How To Run
+
+Install dependencies:
+
+```bash
+npm install
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Open:
+
+```txt
+http://localhost:3000
+```
+
+## Environment Variables
+
+Create a `.env` file in the project root with:
+
+```txt
+VITE_TMDB_KEY=your_tmdb_api_key_here
+```
+
+The `.env` file should not be committed to GitHub.
+
+## Notes
+
+The assignment work is on the `assignment` branch. The app follows the same structure used in the labs: API functions in `src/api/tmdb-api.ts`, types in `src/types/interfaces.ts`, components in `src/components`, and pages in `src/pages`.
