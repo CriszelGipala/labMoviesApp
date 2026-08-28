@@ -5,9 +5,14 @@ import PersonListPageTemplate from "../components/templatePersonListPage";
 import { getPopularPeople } from "../api/tmdb-api";
 import { PopularPeople } from "../types/interfaces";
 import TextField from "@mui/material/TextField";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 const PopularPeoplePage: React.FC = () => {
   const [nameFilter, setNameFilter] = useState("");
+  const [sortOption, setSortOption] = useState("popularity");
 
   const { data, error, isLoading, isError } = useQuery<PopularPeople, Error>(
     "popularPeople",
@@ -26,13 +31,20 @@ const PopularPeoplePage: React.FC = () => {
   const displayedPeople = people.filter((person) =>
     person.name.toLowerCase().includes(nameFilter.toLowerCase())
   );
-  const sortedPeople = [...displayedPeople].sort(
-    (a, b) => b.popularity - a.popularity
-  );
+  const sortedPeople = [...displayedPeople].sort((a, b) => {
+  if (sortOption === "name") {
+    return a.name.localeCompare(b.name);
+  }
+
+  return b.popularity - a.popularity;
+});
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setNameFilter(e.target.value);
   };
+  const handleSortChange = (e: SelectChangeEvent) => {
+  setSortOption(e.target.value);
+};
 
   return (
   <>
@@ -43,6 +55,20 @@ const PopularPeoplePage: React.FC = () => {
       onChange={handleNameChange}
       sx={{ margin: 2 }}
     />
+
+    <FormControl variant="filled" sx={{ margin: 2, minWidth: 180 }}>
+  <InputLabel id="actor-sort-label">Sort actors</InputLabel>
+  <Select
+    labelId="actor-sort-label"
+    value={sortOption}
+    onChange={handleSortChange}
+  >
+    <MenuItem value="popularity">Popularity</MenuItem>
+    <MenuItem value="name">Name</MenuItem>
+  </Select>
+</FormControl>
+
+
 <PersonListPageTemplate title="Popular Actors" people={sortedPeople} />  </>
 );
 };
