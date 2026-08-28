@@ -24,12 +24,15 @@ const PopularPeoplePage: React.FC = () => {
 
   const people = data ? data.results : [];
   const displayedPeople = people.filter((person) =>
-  person.name.toLowerCase().includes(nameFilter.toLowerCase())
-);
+    person.name.toLowerCase().includes(nameFilter.toLowerCase())
+  );
+  const sortedPeople = [...displayedPeople].sort(
+    (a, b) => b.popularity - a.popularity
+  );
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-  setNameFilter(e.target.value);
-};
+    setNameFilter(e.target.value);
+  };
 
   return (
   <>
@@ -40,8 +43,7 @@ const PopularPeoplePage: React.FC = () => {
       onChange={handleNameChange}
       sx={{ margin: 2 }}
     />
-    <PersonListPageTemplate title="Popular Actors" people={displayedPeople} />
-  </>
+<PersonListPageTemplate title="Popular Actors" people={sortedPeople} />  </>
 );
 };
 
