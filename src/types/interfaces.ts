@@ -29,6 +29,10 @@ export interface BaseMovieProps {
 
 export interface MovieListPageTemplateProps extends BaseMovieListProps {
   title: string;
+  onPrevious?: () => void;
+  onNext?: () => void;
+  disablePrevious?: boolean;
+  disableNext?: boolean;
 }
 
   export interface MovieDetailsProps extends BaseMovieProps {
