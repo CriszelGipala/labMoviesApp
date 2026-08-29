@@ -13,11 +13,13 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 const PopularPeoplePage: React.FC = () => {
   const [nameFilter, setNameFilter] = useState("");
   const [sortOption, setSortOption] = useState("popularity");
+  const [page, setPage] = useState(1);
 
   const { data, error, isLoading, isError } = useQuery<PopularPeople, Error>(
-    "popularPeople",
-    getPopularPeople
-  );
+  ["popularPeople", page],
+  () => getPopularPeople(page),
+  { keepPreviousData: true }
+);
 
   if (isLoading) {
     return <Spinner />;
@@ -46,31 +48,48 @@ const PopularPeoplePage: React.FC = () => {
   setSortOption(e.target.value);
 };
 
-  return (
-  <>
-    <TextField
-      label="Filter actors"
-      variant="filled"
-      value={nameFilter}
-      onChange={handleNameChange}
-      sx={{ margin: 2 }}
-    />
+  const handlePreviousPage = () => {
+  setPage((currentPage) => Math.max(currentPage - 1, 1));
+};
 
-    <FormControl variant="filled" sx={{ margin: 2, minWidth: 180 }}>
-  <InputLabel id="actor-sort-label">Sort actors</InputLabel>
-  <Select
-    labelId="actor-sort-label"
-    value={sortOption}
-    onChange={handleSortChange}
-  >
-    <MenuItem value="popularity">Popularity</MenuItem>
-    <MenuItem value="name">Name</MenuItem>
-  </Select>
-</FormControl>
+const handleNextPage = () => {
+  if (data && page < data.total_pages) {
+    setPage((currentPage) => currentPage + 1);
+  }
+};
 
+    return (
+    <>
+      <TextField
+        label="Filter actors"
+        variant="filled"
+        value={nameFilter}
+        onChange={handleNameChange}
+        sx={{ margin: 2 }}
+      />
 
-<PersonListPageTemplate title="Popular Actors" people={sortedPeople} />  </>
-);
+      <FormControl variant="filled" sx={{ margin: 2, minWidth: 180 }}>
+        <InputLabel id="actor-sort-label">Sort actors</InputLabel>
+        <Select
+          labelId="actor-sort-label"
+          value={sortOption}
+          onChange={handleSortChange}
+        >
+          <MenuItem value="popularity">Popularity</MenuItem>
+          <MenuItem value="name">Name</MenuItem>
+        </Select>
+      </FormControl>
+
+      <PersonListPageTemplate
+        title={`Popular Actors - Page ${page}`}
+        people={sortedPeople}
+        onPrevious={handlePreviousPage}
+        onNext={handleNextPage}
+        disablePrevious={page === 1}
+        disableNext={data ? page >= data.total_pages : false}
+      />
+    </>
+  );
 };
 
 export default PopularPeoplePage;

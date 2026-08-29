@@ -24,6 +24,10 @@ const styles = {
 
 type MovieHeaderProps = Partial<MovieDetailsProps> & {
   title: string;
+  onPrevious?: () => void;
+  onNext?: () => void;
+  disablePrevious?: boolean;
+  disableNext?: boolean;
 };
 
 const MovieHeader: React.FC<MovieHeaderProps> = (movie) => {
@@ -32,8 +36,11 @@ const MovieHeader: React.FC<MovieHeaderProps> = (movie) => {
   
   return (
     <Paper component="div" sx={styles.root}>
-      <IconButton aria-label="go back">
-        <ArrowBackIcon color="primary" fontSize="large" />
+      <IconButton
+        aria-label="go back"
+        onClick={movie.onPrevious}
+        disabled={movie.disablePrevious}
+>       <ArrowBackIcon color="primary" fontSize="large" />
       </IconButton>
 
       {isFavourite ? (
@@ -54,7 +61,10 @@ const MovieHeader: React.FC<MovieHeaderProps> = (movie) => {
           </>
         ) : null}
       </Typography>
-      <IconButton aria-label="go forward">
+      <IconButton
+        aria-label="go forward"
+        onClick={movie.onNext}
+        disabled={movie.disableNext}>
         <ArrowForwardIcon color="primary" fontSize="large" />
       </IconButton>
     </Paper>
