@@ -1,4 +1,5 @@
 import React from "react";
+import usePagination from "../hooks/usePagination";
 import PageTemplate from '../components/templateMovieListPage';
 import { BaseMovieProps, DiscoverMovies } from "../types/interfaces";
 import { getUpcomingMovies } from "../api/tmdb-api";
@@ -7,7 +8,18 @@ import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
 
 const UpcomingMoviesPage: React.FC = () => {
-  const { data, error, isLoading, isError } = useQuery<DiscoverMovies, Error>("upcoming", getUpcomingMovies);
+  const {
+    page,
+    handlePreviousPage,
+    handleNextPage,
+    disablePrevious,
+  } = usePagination();
+
+  const { data, error, isLoading, isError } = useQuery<DiscoverMovies, Error>(
+    ["upcoming", page],
+    () => getUpcomingMovies(page),
+    { keepPreviousData: true }
+  );
 
   if (isLoading) {
     return <Spinner />;
@@ -18,15 +30,21 @@ const UpcomingMoviesPage: React.FC = () => {
   }
 
   const movies = data ? data.results : [];
+  const totalPages = data ? data.total_pages : 1;
 
-  return (
+    return (
     <PageTemplate
-      title='Upcoming Movies'
+      title={`Upcoming Movies - Page ${page}`}
       movies={movies}
+      onPrevious={handlePreviousPage}
+      onNext={() => handleNextPage(totalPages)}
+      disablePrevious={disablePrevious}
+      disableNext={page >= totalPages}
       action={(movie: BaseMovieProps) => {
-        return <AddToPlaylistIcon {...movie} />
+        return <AddToPlaylistIcon {...movie} />;
       }}
     />
   );
 };
+
 export default UpcomingMoviesPage;
