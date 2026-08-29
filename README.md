@@ -2,12 +2,15 @@
 
 This project extends the TMDB movie app developed during the Full Stack 2 labs.
 
-## Features Implemented
+## Lab Features Kept
 
 - Discover movies page from the lab.
 - Favourite movies support from the lab.
 - Upcoming movies page from the lab.
 - Movie details and movie reviews from the lab.
+
+## Assignment Features Added
+
 - Popular Actors page.
 - Actor details page.
 - Actor movie credits list.
