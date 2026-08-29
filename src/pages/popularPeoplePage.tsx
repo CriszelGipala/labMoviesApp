@@ -9,17 +9,22 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import usePagination from "../hooks/usePagination";
 
 const PopularPeoplePage: React.FC = () => {
   const [nameFilter, setNameFilter] = useState("");
   const [sortOption, setSortOption] = useState("popularity");
-  const [page, setPage] = useState(1);
-
-  const { data, error, isLoading, isError } = useQuery<PopularPeople, Error>(
-  ["popularPeople", page],
-  () => getPopularPeople(page),
-  { keepPreviousData: true }
-);
+  const {
+    page,
+      handlePreviousPage,
+      handleNextPage,
+      disablePrevious,
+    } = usePagination();
+      const { data, error, isLoading, isError } = useQuery<PopularPeople, Error>(
+      ["popularPeople", page],
+      () => getPopularPeople(page),
+      { keepPreviousData: true }
+    );
 
   if (isLoading) {
     return <Spinner />;
@@ -48,15 +53,7 @@ const PopularPeoplePage: React.FC = () => {
   setSortOption(e.target.value);
 };
 
-  const handlePreviousPage = () => {
-  setPage((currentPage) => Math.max(currentPage - 1, 1));
-};
-
-const handleNextPage = () => {
-  if (data && page < data.total_pages) {
-    setPage((currentPage) => currentPage + 1);
-  }
-};
+  const totalPages = data ? data.total_pages : 1;
 
     return (
     <>
@@ -84,9 +81,9 @@ const handleNextPage = () => {
         title={`Popular Actors - Page ${page}`}
         people={sortedPeople}
         onPrevious={handlePreviousPage}
-        onNext={handleNextPage}
-        disablePrevious={page === 1}
-        disableNext={data ? page >= data.total_pages : false}
+        onNext={() => handleNextPage(totalPages)}
+        disablePrevious={disablePrevious}
+        disableNext={page >= totalPages}
       />
     </>
   );
