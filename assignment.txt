@@ -1,0 +1,8 @@
+GitHub repository:
+https://github.com/CriszelGipala/labMoviesApp/tree/assignment
+
+Deployed app:
+https://lab-movies-app-azure.vercel.app
+
+YouTube demo video:
+(to-do)
