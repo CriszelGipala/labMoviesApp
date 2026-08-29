@@ -2,8 +2,6 @@
 
 This project extends the TMDB movie app developed during the Full Stack 2 labs.
 
-The aim is to keep the assignment close to the lab style so the code is easy to understand and explain. The app uses React, TypeScript, React Router, React Query, MUI, and the TMDB API.
-
 ## Features Implemented
 
 - Discover movies page from the lab.
@@ -15,19 +13,10 @@ The aim is to keep the assignment close to the lab style so the code is easy to 
 - Actor movie credits list.
 - Top Rated Movies page.
 - Actor name filtering on the Popular Actors page.
+- Actor sorting by popularity or name on the Popular Actors page.
+- Pagination on the Popular Actors page.
 - Data links from actor cards to actor details.
 - Data links from actor movie credits back to movie details.
-
-## Planned Small Extra
-
-The next small improvement is actor sorting on the Popular Actors page.
-
-The planned sort options are:
-
-- Popularity
-- Name
-
-This is intended as a simple extra feature because it builds directly on the actor filter already added to the page.
 
 ## Routes
 
