@@ -90,3 +90,5 @@ The `.env` file should not be committed to GitHub.
 ## Notes
 
 The assignment work is on the `assignment` branch. The app follows the same structure used in the labs: API functions in `src/api/tmdb-api.ts`, types in `src/types/interfaces.ts`, components in `src/components`, and pages in `src/pages`.
+
+I used AI support to help me understand how pagination works in React and how to apply it using state, React Query, and reusable props.
